@@ -10007,7 +10007,6 @@ function forEach(array, callback) {
     callback(array[i], i, array);
   }
 }
-
 //   second question
 function filter(array, callback) {
   const filtered = [];
@@ -10108,7 +10107,7 @@ function getIranianNames(users) {
 }
 
 const names = getIranianNames(users);
-
+console.log(names);
 // fliter map non-binary bank account
 function getNonBinaryBalance(users) {
   const nonBinary = users.filter((user) => user.gender === "Non-binary");
@@ -10198,7 +10197,7 @@ function getTotalBalanceMaleUsersWOReduce(users) {
 
 //French Balance with reduce
 function getAverageBalanceFrench(users) {
-  const frenchUsers = users.filter((user) => user.nationality === "French");
+  const frenchUsers = users.filter((user) => user.country === "France");
 
   const total = frenchUsers.reduce((sum, user) => {
     return sum + user.balance;
@@ -10211,7 +10210,7 @@ function getAverageBalanceFrench(users) {
 function getAverageBalanceFrenchWOReduce(users) {
   let total = 0;
 
-  const frenchUsers = users.filter((user) => user.nationality === "French");
+  const frenchUsers = users.filter((user) => user.country === "France");
 
   for (let user of frenchUsers) {
     total += user.balance;
@@ -10266,8 +10265,8 @@ const result = getIraniansInfo(users);
 // Richest american guy and french gal
 function getAgeDiff(users) {
 
-    const americans = users.filter(u => u.nationality === 'American' && u.gender === 'male');
-    const french = users.filter(u => u.nationality === 'French' && u.gender === 'female');
+    const americans = users.filter(u => u.country === 'United States' && u.gender === 'male');
+    const french = users.filter(u => u.country === 'France' && u.gender === 'female');
   
     americans.sort((a, b) => b.balance - a.balance);
     french.sort((a, b) => b.balance - a.balance);
@@ -10346,10 +10345,10 @@ function removeRichestByCountry(users) {
 
     let newList = [...users];
     
-    const countries = new Set(users.map(u => u.nationality));
+    const countries = new Set(users.map(u => u.country));
     
     countries.forEach(country => {
-      const filtered = newList.filter(u => u.nationality === country);
+      const filtered = newList.filter(u => u.country === country);
       filtered.sort((a, b) => b.balance - a.balance);
       newList = newList.filter(u => u !== filtered[0]); 
     });
